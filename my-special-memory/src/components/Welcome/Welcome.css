@@ -1,0 +1,60 @@
+/* src/components/Welcome.css */
+
+#welcome-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Centra el contenido */
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    background: linear-gradient(135deg, #6a5acd, #ff69b4); /* Degradado de fondo */
+    color: white; /* Color de texto blanco */
+    text-align: center; /* Centramos el texto */
+    animation: fadeIn 1s ease; /* Efecto de aparición suave */
+}
+
+.welcome-title {
+    font-size: 3em; /* Tamaño grande para el título */
+    margin-bottom: 20px; /* Margen inferior */
+    font-family: 'Dancing Script', cursive; /* Fuente estilizada */
+}
+
+.welcome-message {
+    font-size: 1.5em; /* Tamaño del mensaje */
+    margin-bottom: 30px; /* Margen inferior */
+    max-width: 600px; /* Ancho máximo del mensaje */
+}
+
+.section-list {
+    list-style-type: none; /* Sin puntos de la lista */
+    padding: 0; /* Sin padding */
+}
+
+.section-list li {
+    margin: 10px 0; /* Margen entre elementos de la lista */
+    font-size: 1.2em; /* Tamaño del texto */
+    opacity: 0; /* Inicialmente invisibles para la animación */
+    transform: translateY(20px); /* Desplazamiento hacia abajo */
+    animation: fadeInUp 0.5s forwards; /* Aplicamos la animación */
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Desplazamos hacia arriba a su posición original */
+    }
+}
+
+/* Establecemos un retraso para cada elemento en la lista */
+.fade-in {
+    animation-delay: calc(0.5s * var(--i));
+}

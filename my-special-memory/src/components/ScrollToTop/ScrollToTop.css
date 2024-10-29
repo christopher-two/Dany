@@ -1,0 +1,22 @@
+/* src/components/ScrollToTop.css */
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px; /* Espacio desde el fondo */
+    right: 30px; /* Espacio desde la derecha */
+    background-color: #6a5acd; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none; /* Sin bordes */
+    border-radius: 50%; /* Bordes redondeados */
+    width: 50px; /* Ancho del botón */
+    height: 50px; /* Alto del botón */
+    font-size: 24px; /* Tamaño de la flecha */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 0.3s ease; /* Efecto de transición */
+    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+}
+
+.scroll-to-top.visible {
+    opacity: 1; /* Muestra el botón cuando es visible */
+}

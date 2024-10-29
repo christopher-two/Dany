@@ -1,0 +1,71 @@
+:root {
+    --color-principal: #5a1c8e;
+    --color-secundario: #6F20B5;
+    --color-fondo: #c284ff;
+    --color-texto: #333333;
+    --color-texto-suave: #666666;
+    --color-acento: #4b0082;
+    --color-sombra: rgba(0, 0, 0, 0.2);
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    color: var(--color-texto);
+    background-color: var(--color-fondo);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Asegura que el contenido del header sea responsivo */
+header h1 {
+    font-size: 3.5em;
+    font-family: 'Dancing Script', cursive;
+    margin: 0;
+}
+
+header p {
+    font-size: 1.2em;
+    margin: 10px 0 20px;
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 50vh;
+}
+
+section {
+    background-color: var(--color-fondo);
+    margin-bottom: 30px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px var(--color-sombra);
+    transition: transform 0.3s;
+}
+
+section:hover {
+    transform: translateY(-5px);
+}
+
+section h2 {
+    font-size: 2.5em;
+    color: var(--color-principal);
+    font-family: 'Dancing Script', cursive;
+    border-bottom: 2px solid var(--color-acento);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.icono {
+    color: var(--color-principal);
+    font-size: 1.5em;
+    margin-right: 8px;
+}
+
+html {
+    scroll-behavior: smooth;
+}

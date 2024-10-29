@@ -1,0 +1,87 @@
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura completa del viewport */
+    text-align: center;
+    background: linear-gradient(to bottom right, var(--color-principal), var(--color-secundario));
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 20px var(--color-sombra);
+    opacity: 0;
+    animation: fadeIn 1.5s ease-in forwards;
+}
+
+.background-quotes {
+    font-family:  'Dancing Script', cursive;
+    font-size: 2em;
+    color: rgb(193, 150, 232); /* Color muy suave para que no opaque el contenido */
+    animation: fadeQuotes 10s infinite; /* Anima los quotes en un ciclo infinito */
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px; /* Espacio entre los íconos */
+    margin-bottom: 10px; /* Espacio debajo de los íconos */
+}
+
+.social-icons a {
+    color: #FFFFFF; /* Cambia esto al color que desees */
+    font-size: 1.5em; /* Tamaño de los íconos */
+    transition: color 0.3s, transform 0.3s; /* Efecto de transición para color y escala */
+}
+
+.social-icons a:hover {
+    color: #282c34;
+    transform: scale(1.2); /* Agranda el ícono */
+}
+
+h1 {
+    width: fit-content;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid white;
+    animation: typing 3s steps(30, end) forwards, blink-caret 3s steps(30, end) forwards;
+}
+
+p {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1.5s ease-in forwards 0.3s; /* Cambia el atraso si lo deseas */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeQuotes {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    0%, 50% { border-color: white; }
+    100% { border-color: transparent; }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

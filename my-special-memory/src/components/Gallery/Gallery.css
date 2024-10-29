@@ -1,0 +1,62 @@
+/* src/components/Gallery/Gallery.css */
+
+#gallery-content {
+    padding: 20px;
+}
+
+.gallery-header {
+    text-align: center; /* Centra el contenido del encabezado */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+.gallery-header h2 {
+    font-size: 2.5em; /* Tamaño de fuente para el título */
+    color: #FFFFFF; /* Color de texto */
+    font-family: 'Dancing Script', cursive; /* Fuente decorativa */
+}
+
+.divider {
+    width: 50%; /* Ancho de la línea */
+    margin: 10px auto; /* Centra la línea */
+    border: 0; /* Elimina bordes por defecto */
+    height: 2px; /* Grosor de la línea */
+    background-color: var(--color-acento); /* Color de la línea */
+    border-radius: 5px; /* Esquinas redondeadas */
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Ajusta el tamaño mínimo según sea necesario */
+    gap: 10px; /* Espacio entre las imágenes */
+}
+
+.gallery-image {
+    width: 100%; /* Ocupa el ancho completo del contenedor de la cuadrícula */
+    height: auto; /* Mantiene la relación de aspecto */
+    border-radius: 10px; /* Esquinas redondeadas */
+    transition: transform 0.3s; /* Animación al pasar el mouse */
+}
+
+.gallery-image:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+}
+
+/* Estilo para el contenedor del overlay de pantalla completa */
+.fullscreen-overlay {
+    position: fixed; /* Fija la posición */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro semi-transparente */
+    display: flex; /* Flexbox para centrar la imagen */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    z-index: 1000; /* Asegúrate de que esté sobre otros elementos */
+}
+
+.fullscreen-image {
+    max-width: 90%; /* Ancho máximo de la imagen */
+    max-height: 90%; /* Alto máximo de la imagen */
+    border-radius: 10px; /* Esquinas redondeadas */
+}

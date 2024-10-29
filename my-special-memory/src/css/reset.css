@@ -1,0 +1,12 @@
+/* reset.css */
+
+/* Reset básico de estilos para una mejor compatibilidad entre navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif; /* Establecer una fuente base */
+}
