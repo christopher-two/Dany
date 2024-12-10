@@ -1,31 +1,64 @@
 import React, { useEffect, useState } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component'; // Importar el componente de carga perezosa
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { getStorage, ref as storageRef, listAll, getDownloadURL, uploadBytes, deleteObject } from 'firebase/storage';
 import './Gallery.css';
 
 const Gallery = () => {
     const [images, setImages] = useState([]);
-    const [fullscreenImage, setFullscreenImage] = useState(null); // Estado para la imagen en pantalla completa
+    const [fullscreenImage, setFullscreenImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const storage = getStorage();
 
     useEffect(() => {
-        const loadGallery = async () => {
+        const fetchImages = async () => {
+            const imagesRef = storageRef(storage, 'imagenes');
             try {
-                const response = await fetch('/data/img.json');
-                if (!response.ok) throw new Error('Error al cargar el JSON');
-                const data = await response.json();
-                setImages(data.gallery);
+                const result = await listAll(imagesRef);
+                const urlPromises = result.items.map((itemRef) => getDownloadURL(itemRef));
+                const urls = await Promise.all(urlPromises);
+                setImages(urls);
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Error al obtener las URLs de las imágenes:', error);
             }
         };
-        loadGallery();
+
+        fetchImages();
     }, []);
 
-    const handleImageClick = (image) => {
-        setFullscreenImage(image); // Actualiza el estado de la imagen en pantalla completa
+    const handleImageClick = (image) => setFullscreenImage(image);
+    const handleCloseFullscreen = () => setFullscreenImage(null);
+
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            setSelectedImage(file);
+        }
     };
 
-    const handleCloseFullscreen = () => {
-        setFullscreenImage(null); // Cierra la imagen en pantalla completa
+    const handleUpload = async (event) => {
+        event.preventDefault();
+        if (!selectedImage) return;
+
+        const imageRef = storageRef(storage, `imagenes/${selectedImage.name}`);
+        await uploadBytes(imageRef, selectedImage);
+        const url = await getDownloadURL(imageRef);
+        setImages((prevImages) => [...prevImages, url]);
+        setSelectedImage(null);
+        event.target.reset();
+    };
+
+    const handleDelete = async (image) => {
+        const imageName = image.split('/').pop(); // Extrae el nombre del archivo
+        const imageRef = storageRef(storage, `imagenes/${imageName}`); // Crea la referencia
+
+        try {
+            await deleteObject(imageRef); // Elimina el objeto
+            setImages((prevImages) => prevImages.filter((img) => img !== image)); // Actualiza el estado
+            handleCloseFullscreen(); // Cierra el overlay
+            console.log(`Imagen ${imageName} eliminada exitosamente.`); // Confirmación de eliminación
+        } catch (error) {
+            console.error('Error al eliminar la imagen:', error);
+        }
     };
 
     return (
@@ -34,8 +67,19 @@ const Gallery = () => {
                 <h2>
                     <i className="fa fa-camera"></i> Galería
                 </h2>
-                <hr className="divider" />
+                <hr className="divider"/>
             </div>
+
+            <form onSubmit={handleUpload} className="gallery-upload-form">
+                <label className="custom-file-upload">
+                    <input type="file" accept="image/*" onChange={handleFileChange} required />
+                    Seleccionar Imagen
+                </label>
+                <button type="submit" className="gallery-upload-button" disabled={!selectedImage}>
+                    Subir Imagen
+                </button>
+            </form>
+
             <div className="gallery-grid">
                 {images.length > 0 ? (
                     images.map((image, index) => (
@@ -44,9 +88,8 @@ const Gallery = () => {
                             src={image}
                             alt="Momento especial"
                             className="gallery-image"
-                            onClick={() => handleImageClick(image)} // Maneja el clic en la imagen
-                            effect="opacity" // Efecto de aparición suave
-                            placeholderSrc="/path/to/placeholder/image.jpg" // Puedes colocar una imagen de carga aquí
+                            onClick={() => handleImageClick(image)}
+                            effect="opacity"
                         />
                     ))
                 ) : (
@@ -54,9 +97,12 @@ const Gallery = () => {
                 )}
             </div>
 
-            {fullscreenImage && ( // Condición para mostrar la imagen en pantalla completa
+            {fullscreenImage && (
                 <div className="fullscreen-overlay" onClick={handleCloseFullscreen}>
-                    <img src={fullscreenImage} alt="Imagen Ampliada" className="fullscreen-image" />
+                    <img src={fullscreenImage} alt="Imagen Ampliada" className="fullscreen-image"/>
+                    <button className="delete-button" onClick={() => handleDelete(fullscreenImage)}>
+                        Eliminar
+                    </button>
                 </div>
             )}
         </div>

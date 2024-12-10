@@ -1,22 +1,31 @@
-// src/components/Playlist.js
 import React, { useEffect, useState } from 'react';
-import './Playlist.css'; // Asegúrate de importar tu CSS
+import { ref, onValue } from 'firebase/database';
+import { database } from '../../firebaseConfig';
+import './Playlist.css';
 
 const Playlist = () => {
     const [playlist, setPlaylist] = useState(null);
 
     useEffect(() => {
-        const loadPlaylist = async () => {
-            try {
-                const response = await fetch('/data/playlist.json');
-                if (!response.ok) throw new Error('Error al cargar el JSON');
-                const data = await response.json();
-                setPlaylist(data.playlist);
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        };
-        loadPlaylist();
+        const storedPlaylist = localStorage.getItem('playlist');
+
+        if (storedPlaylist) {
+            // Si hay datos en localStorage, los cargamos directamente
+            setPlaylist(JSON.parse(storedPlaylist));
+        } else {
+            // Si no hay datos en localStorage, los obtenemos de Firebase y los guardamos
+            const playlistRef = ref(database, 'playlist');
+
+            onValue(playlistRef, (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    setPlaylist(data);
+                    localStorage.setItem('playlist', JSON.stringify(data)); // Guardamos los datos en localStorage
+                } else {
+                    console.error('No se encontró la playlist en la base de datos');
+                }
+            });
+        }
     }, []);
 
     if (!playlist) return <p>Error al cargar la playlist. Intenta de nuevo más tarde.</p>;
@@ -27,10 +36,9 @@ const Playlist = () => {
             <hr className="divider"/>
             <p className="playlist-description">{playlist.description}</p>
 
-            {/* Nuevo iframe de Spotify */}
             <div className="spotify-embed">
                 <iframe
-                    style={{borderRadius: '15px'}} /* Bordes redondeados para el iframe */
+                    style={{ borderRadius: '15px' }}
                     src="https://open.spotify.com/embed/playlist/7xKCQnkp71J9mWwBouhYBq?utm_source=generator&theme=0"
                     width="100%"
                     height="352"

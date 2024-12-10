@@ -1,7 +1,7 @@
 :root {
-    --color-principal: #5a1c8e;
-    --color-secundario: #6F20B5;
-    --color-fondo: #c284ff;
+    --color-principal: #7e121d;
+    --color-secundario: #bd3634;
+    --color-fondo: #034f1b;
     --color-texto: #333333;
     --color-texto-suave: #666666;
     --color-acento: #4b0082;
@@ -68,4 +68,47 @@ section h2 {
 
 html {
     scroll-behavior: smooth;
+}
+
+/* Efecto de nieve */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: #ffffff;
+    font-size: 1em;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateX(0) translateY(-10px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateX(50px) translateY(100vh);
+        opacity: 0;
+    }
+}
+
+@keyframes sway {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+}
+
+/* Contenedor de nieve */
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Evita la interferencia con los clics */
+    overflow: hidden;
+    z-index: 1000; /* Asegúrate de que los copos estén encima del contenido */
 }

@@ -1,9 +1,9 @@
-// src/components/BottomNav.js
+// src/components/BottomNav/BottomNav.js
 import React, { useState } from 'react';
-import './BottomNav.css'; // Asegúrate de que este archivo sea correcto
+import './BottomNav.css';
 
-const BottomNav = ({ onGalleryClick, onPlaylistClick, onPoemsClick }) => {
-    const [activeButton, setActiveButton] = useState('gallery'); // Establece la galería como botón activo por defecto
+const BottomNav = ({ onGalleryClick, onPlaylistClick, onPoemsClick, onMomentsClick, onTernurinesClick }) => {
+    const [activeButton, setActiveButton] = useState('gallery');
 
     const handleGalleryClick = (e) => {
         e.preventDefault();
@@ -23,28 +23,34 @@ const BottomNav = ({ onGalleryClick, onPlaylistClick, onPoemsClick }) => {
         onPoemsClick();
     };
 
+    const handleMomentsClick = (e) => {
+        e.preventDefault();
+        setActiveButton('moments');
+        onMomentsClick();
+    };
+
+    const handleTernurinesClick = (e) => {
+        e.preventDefault();
+        setActiveButton('ternurines');
+        onTernurinesClick();
+    };
+
     return (
         <nav>
-            <a
-                href="#"
-                onClick={handleGalleryClick}
-                className={activeButton === 'gallery' ? 'active' : ''}
-            >
+            <a href="#" onClick={handleGalleryClick} className={activeButton === 'gallery' ? 'active' : ''}>
                 <i className="fa fa-camera" aria-hidden="true"></i> Gallery
             </a>
-            <a
-                href="#"
-                onClick={handlePlaylistClick}
-                className={activeButton === 'playlist' ? 'active' : ''}
-            >
+            <a href="#" onClick={handleTernurinesClick} className={activeButton === 'ternurines' ? 'active' : ''}>
+                <i className="fa fa-paw" aria-hidden="true"></i> Ternurines
+            </a>
+            <a href="#" onClick={handlePlaylistClick} className={activeButton === 'playlist' ? 'active' : ''}>
                 <i className="fa fa-music" aria-hidden="true"></i> Playlist
             </a>
-            <a
-                href="#"
-                onClick={handlePoemsClick}
-                className={activeButton === 'poems' ? 'active' : ''}
-            >
+            <a href="#" onClick={handlePoemsClick} className={activeButton === 'poems' ? 'active' : ''}>
                 <i className="fa fa-book" aria-hidden="true"></i> Poems
+            </a>
+            <a href="#" onClick={handleMomentsClick} className={activeButton === 'moments' ? 'active' : ''}>
+                <i className="fa fa-heart" aria-hidden="true"></i> Moments
             </a>
         </nav>
     );

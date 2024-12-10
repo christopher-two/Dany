@@ -4,7 +4,7 @@
     max-width: 800px; /* Ancho máximo para la lista de reproducción */
     margin: 40px auto; /* Margen superior para espacio adicional */
     padding: 30px; /* Aumento del padding para mayor espacio */
-    background-color: rgba(0, 0, 0, 0.8); /* Color de fondo blanco */
+    background-color: var(--color-secundario); /* Color de fondo blanco */
     border-radius: 15px; /* Bordes más redondeados */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Sombra más suave y profunda */
     font-family: 'Lato', sans-serif; /* Fuente elegante para el contenedor */
@@ -61,11 +61,11 @@
 }
 
 .playlist-song:hover {
-    background-color: #c196e8; /* Color de fondo más suave al pasar el mouse */
+    background-color: var(--color-acento); /* Color de fondo más suave al pasar el mouse */
 }
 
 .playlist-song strong a {
-    color: #d4aaff; /* Color lila suave para el título de la canción */
+    color: white; /* Color lila suave para el título de la canción */
     text-decoration: none; /* Sin subrayado */
     font-weight: bold; /* Negrita para el título */
 }

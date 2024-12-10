@@ -1,21 +1,22 @@
-/* src/components/Welcome.css */
-
 #welcome-div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center; /* Centra el contenido */
     height: 100vh; /* Ocupa toda la altura de la ventana */
-    background: linear-gradient(135deg, #6a5acd, #ff69b4); /* Degradado de fondo */
+    background: linear-gradient(135deg, var(--color-secundario), var(--color-principal)); /* Degradado de fondo */
     color: white; /* Color de texto blanco */
     text-align: center; /* Centramos el texto */
     animation: fadeIn 1s ease; /* Efecto de aparición suave */
+    padding: 20px; /* Espaciado interno para evitar bordes pegados */
+    box-sizing: border-box; /* Incluye padding en el tamaño total */
 }
 
 .welcome-title {
     font-size: 3em; /* Tamaño grande para el título */
     margin-bottom: 20px; /* Margen inferior */
     font-family: 'Dancing Script', cursive; /* Fuente estilizada */
+    line-height: 1.2; /* Ajusta el espaciado entre líneas */
 }
 
 .welcome-message {
@@ -57,4 +58,59 @@
 /* Establecemos un retraso para cada elemento en la lista */
 .fade-in {
     animation-delay: calc(0.5s * var(--i));
+}
+
+/* Responsividad */
+
+/* Para pantallas medianas (tablets) */
+@media (max-width: 768px) {
+    #welcome-div {
+        padding: 15px; /* Reduce el padding */
+    }
+
+    .welcome-title {
+        font-size: 2.5em; /* Reduce el tamaño del título */
+    }
+
+    .welcome-message {
+        font-size: 1.2em; /* Reduce el tamaño del texto */
+    }
+
+    .section-list li {
+        font-size: 1em; /* Reduce el tamaño de los elementos de la lista */
+    }
+}
+
+/* Para pantallas pequeñas (móviles) */
+@media (max-width: 480px) {
+    #welcome-div {
+        padding: 10px; /* Reduce aún más el padding */
+    }
+
+    .welcome-title {
+        font-size: 2em; /* Tamaño más pequeño para móviles */
+    }
+
+    .welcome-message {
+        font-size: 1em; /* Reduce el tamaño del mensaje */
+    }
+
+    .section-list li {
+        font-size: 0.9em; /* Tamaño más pequeño de los elementos de la lista */
+    }
+}
+
+/* Para pantallas grandes */
+@media (min-width: 1024px) {
+    .welcome-title {
+        font-size: 4em; /* Aumenta el tamaño del título */
+    }
+
+    .welcome-message {
+        font-size: 1.8em; /* Aumenta el tamaño del mensaje */
+    }
+
+    .section-list li {
+        font-size: 1.5em; /* Tamaño más grande de los elementos de la lista */
+    }
 }
