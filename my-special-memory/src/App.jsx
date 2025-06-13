@@ -1,16 +1,16 @@
-// src/App.js
+// src/App.jsx
 import React, { useState, useEffect } from 'react';
 import './css/styles.css';
 import './css/fonts.css';
-import Header from './components/Header/Header';
-import BottomNav from './components/BottomNav/BottomNav';
-import Gallery from './components/Gallery/Gallery';
-import Playlist from './components/Playlist/Playlist';
-import Poems from './components/Poems/Poems';
-import Moments from './components/Moments/Moments';
-import Ternurines from './components/TernurinesGallery/TernurinesGallery';
-import Welcome from './components/Welcome/Welcome';
-import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import Header from './components/Header/Header.jsx';
+import BottomNav from './components/BottomNav/BottomNav.jsx';
+import Gallery from './components/Gallery/Gallery.jsx';
+import Playlist from './components/Playlist/Playlist.jsx';
+import Poems from './components/Poems/Poems.jsx';
+import Moments from './components/Moments/Moments.jsx';
+import Ternurines from './components/TernurinesGallery/TernurinesGallery.jsx';
+import Welcome from './components/Welcome/Welcome.jsx';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop.jsx';
 import 'font-awesome/css/font-awesome.min.css';
 
 const App = () => {
